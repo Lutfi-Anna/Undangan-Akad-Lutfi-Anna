@@ -49,7 +49,7 @@
         }
         let isAutoScrolling = false;
         let isUserHolding = false;
-        const scrollSpeed = 0.8; //Kecepatan
+        const scrollSpeed = 1.5; //Kecepatan
 
         function startAutoScroll() {
             if (isAutoScrolling) return;
@@ -554,7 +554,8 @@
                 setTimeout(() => {
                     startAutoScroll();
                 }, 1500);
-        }, 1000);
+             }, 1000);
+        }
 
         // 3. AUDIO CONTROLLER
         function playAudio() {
