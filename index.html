@@ -47,6 +47,37 @@
                 }
             }
         }
+        let isAutoScrolling = false;
+        let isUserHolding = false;
+        const scrollSpeed = 0.8; //Kecepatan
+
+        function startAutoScroll() {
+            if (isAutoScrolling) return;
+            isAutoScrolling = true;
+
+            function scrollStep() {
+                if (isAutoScrolling) {
+                    if (!isUserHolding) {
+                        window.scrollBy(0, scrollSpeed);
+
+                        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+                            stopAutoScroll();
+                            return;
+                        }
+                    }
+                    requestAnimationFrame(scrollStep);
+                }
+            }
+            requestAnimationFrame(scrollStep);
+        }
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+        }
+
+        window.addEventListener('mousedown', () => { isUserHolding = true; });
+        window.addEventListener('mouseup', () => { isUserHolding = false; });
+        window.addEventListener('touchstart', ()=> { isUserHolding = true; }, { passive: true });
+        window.addEventListener('touchend', () => {isUserHolding = false; });
     </script>
 
     <!-- CUSTOM CSS PATTERN & DARK THEME STYLES -->
@@ -520,8 +551,10 @@
 
             setTimeout(() => {
                 lockScreen.style.display = 'none';
-            }, 1000);
-        }
+                setTimeout(() => {
+                    startAutoScroll();
+                }, 1500);
+        }, 1000);
 
         // 3. AUDIO CONTROLLER
         function playAudio() {
