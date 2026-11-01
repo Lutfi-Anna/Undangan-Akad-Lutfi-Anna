@@ -770,12 +770,13 @@
                               `Terima kasih!`;
 
             // Membuka aplikasi WhatsApp
-            const linkWA = `https://wa.me/${6281993891605}?text=${encodeURIComponent(teksPesan)}`;
-            window.open(linkWA, '_blank');
+            const linkWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(teksPesan)}`;
 
             // Reset form & tampilkan notifikasi toast
             document.getElementById('rsvpForm').reset();
             showToast(`Terima kasih ${nama}, konfirmasi berhasil dikirim via WhatsApp!`);
+
+            window.location.href = linkWA;
         }
 
         // 7. SCROLL REVEAL OBSERVER
